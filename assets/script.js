@@ -16,14 +16,24 @@ function aleatorio(inferior, superior) {
 function moverBoton() {
     BtnNo = document.getElementById("noClick");
 
-    let ancho = document.documentElement.scrollWidth/2 - 93;
-    let alto = document.documentElement.scrollHeight/2 - 72;
+    let ancho = document.documentElement.scrollWidth/2 - 90;
+    let alto = document.documentElement.scrollHeight/2 - 70;
 
     var x = aleatorio(-ancho,ancho);
     var y = aleatorio(-alto,alto);
-    console.log( "ancho = " + ancho + " alto = " + alto );
-    console.log( "x = " + x + " y = " + y );
 
     BtnNo.setAttribute("style", "position: relative; left: " + x + "px; top: " + y + "px;");
 }
 
+function traerValoresDeLaURL(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var pregunta = traerValoresDeLaURL('pregunta');
+
+document.getElementById("pregunta").innerHTML = pregunta;
+
+console.log(pregunta);
